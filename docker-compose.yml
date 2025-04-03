@@ -1,0 +1,22 @@
+services:
+  library-database:
+    container_name: library-database
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - library-database-volume:/var/lib/postgresql/data
+    networks:
+      - principal_network
+
+volumes:
+  library-database-volume:
+    name: library-database-volume
+
+networks:
+  principal_network:
+    name: principal_network
