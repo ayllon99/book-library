@@ -1,0 +1,543 @@
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1003' height='739' viewBox='0 0 1003 739' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','unhighlight'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#97a0a7; font-family: System, 'Segoe UI', Dialog; font-size:14.083333015441895px; }
+  text.tableHeader    { fill:#b9c4cf; font-family: System, 'Segoe UI', Dialog; font-size:14.625px; font-weight: Bold; }
+  a text:hover        { fill:#ffffff; text-shadow: 0px 0px 6px #d0ce00; font-size:13px; }
+  text.highlight      { fill:#e79a33; text-shadow: 0px 0px 4px #674210; font-size:13px; }
+  text.white          { fill:#c5c5c5; }
+  text.colPk          { fill:#dbdfe2;; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#85909a; }
+  text.dataType       { stroke:0; font-size:12px; text-anchor: end; }
+  text.legendTitle    { fill:#93b6d8; font-weight:bold; }
+  text.legendSubTitle { fill:#b0b0b0; font-size: 12px; }
+  path, circle        { stroke:#6a7880; stroke-width:1.5; fill:none;}
+  path.virtual        { stroke:#a364b5; }
+  path.logo           { fill:#b5c8a9;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
+  path.dotted         { stroke-dasharray:4,2; }
+  path.unhighlight    { stroke-width:12; opacity:0;}
+  path.highlight      { stroke-width:2; stroke:#0e6ad9; opacity:1;}
+  path.line           { stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+  rect.entity         { fill:#272829; stroke-width:0;shape-rendering:crispEdges; filter:url(#shadow); }
+  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
+  text.callout        { fill:#dfe0c5; font-family: System, 'Segoe UI', Dialog; font-size:14.083333015441895px; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#3f3f3f; stroke-width:0.5; }
+  rect.legend         { fill:url(#legendGradient); stroke-width:1px; stroke:#202020; filter:url(#shadow); }
+  text.grp            { fill:#8a8a8a; }
+  rect.grp            { stroke:#a1a1a1; stroke-width:1.7; opacity:0.34; }
+  path.bgPattern      { fill:none;fill-opacity:1;stroke-width:0.6;stroke:#3b3c3d; }
+  path.eval           { fill:#44484b;stroke-width:0.6;stroke:#5a5c5f; }
+  rect.palpable       { fill:#504d41; }
+</style>
+<defs>
+    <pattern id="layoutBgA" width="60" height="34.64" patternUnits="userSpaceOnUse">
+        <rect x="0" y="0"  width="60" height="34.64" fill="#37383c" />
+    </pattern>
+    <pattern id='layoutBgEval' width='200' height='200' x='0' y='0' patternUnits="userSpaceOnUse">
+        <path class='eval' d='m 62.011835,91.267143 c 3.536475,3.175214 2.262669,8.705999 -1.637711,11.015197 -3.594697,5.8423 -6.34682,-2.892623 -9.715478,-4.653898 -5.609222,-2.838926 2.050802,-6.680123 4.77004,-8.319046 2.334696,-0.724067 4.935143,0.312302 6.583149,1.957747 z m -2.720492,2.538595 c -2.698397,-3.517732 -9.282815,1.269287 -3.69635,3.568637 2.765331,5.605665 7.052809,-0.56184 3.69635,-3.568637 z' />
+        <path class='eval' d='m 72.25864,84.624638 c 4.108046,3.143003 -0.737059,6.895259 -1.994918,8.323564 -3.586718,5.561143 -6.495079,-4.197379 -10.07759,-5.582178 -4.443422,-1.088878 1.349298,-7.249213 2.503526,-2.503449 2.464639,4.517161 2.304019,-3.70697 6.291113,-1.995914 1.280083,0.137865 2.410691,0.864819 3.277869,1.757977 z m -2.646109,2.323242 c -4.797162,-3.078383 -2.810517,6.305507 0.515161,1.990646 0.296432,-0.688582 0.01209,-1.493412 -0.515161,-1.990646 z' />
+        <path class='eval' d='m 78.230641,79.436735 c 4.142121,3.027466 -2.020102,10.435276 -3.450543,5.477315 3.306312,-5.248112 -9.186019,-2.220094 -5.805994,-8.77679 -0.544141,-3.93011 6.797826,-2.102227 3.386015,0.245477 -0.181085,2.915838 4.637371,1.019311 5.870522,3.053982 z' />
+        <path class='eval' d='m 82.744502,72.597397 c -4.901605,1.926521 1.146497,6.285555 2.559694,2.225783 6.21817,3.539297 -6.640186,8.416664 -7.590325,1.997457 -2.24365,-2.914883 4.026676,-10.148618 5.030631,-4.22324 z' />
+        <path class='eval' d='m 90.727458,64.259158 c 1.583987,1.690029 3.321317,3.2696 4.81267,5.026353 -2.535706,6.849794 -6.445583,-5.918773 -8.388458,-0.167017 0.782768,2.03426 5.877405,3.752079 2.670979,5.711199 -3.315119,1.519161 -5.782422,-5.157931 -8.858893,-6.780537 -4.229842,-1.139816 1.510134,-7.074128 2.586227,-2.385939 3.141198,5.495193 1.840537,-5.598295 7.177489,-1.404062 z' />
+        <path class='eval' d='m 99.622027,58.374253 c 1.493293,1.9548 -6.281936,7.024659 -0.885258,4.740447 0.386238,-4.434477 6.131941,-1.133173 2.175851,1.618005 -4.421491,6.12739 -13.666659,-3.151506 -7.058299,-7.136537 1.785129,-1.119329 4.348209,-0.743179 5.767706,0.778085 z m -2.900824,1.89746 c -3.608188,-2.208543 -2.280489,5.00803 -0.12563,0.329531 z' />
+        <path class='eval' d='m 115.18023,50.570441 c -1.61703,5.201678 -4.6204,-0.364502 -7.01598,-1.749619 -4.40977,2.122562 4.89641,4.913939 1.89606,7.018157 -2.48061,3.877635 -4.11404,-4.060614 -7.01192,-2.6391 -1.76318,3.107252 7.28394,6.252304 0.87346,7.876177 -1.74515,-2.956649 -9.055498,-5.610518 -3.950378,-8.66062 1.696478,1.897023 1.770418,-5.43503 5.347308,-3.072411 -0.44014,-5.474701 6.11995,-4.950882 7.7846,-0.815355 0.69076,0.682329 1.39587,1.351469 2.07685,2.042771 z' />
+        <path class='eval' d='m 120.54891,39.417125 c 2.50681,1.334124 4.80466,4.941837 0.75044,5.297362 -0.46414,1.89865 -5.25369,5.602652 -8.01742,1.815475 -3.87345,-2.809139 -0.0676,-7.603869 2.3036,-8.133924 1.6795,-3.853018 3.16703,-1.199465 4.96338,1.021087 z m -2.2464,2.175828 c -4.8049,-2.992167 -3.08987,6.380358 0.42374,2.036159 0.33052,-0.677508 0.12099,-1.525836 -0.42374,-2.036159 z' />
+        <path class='eval' d='m 128.50836,24.06821 c -5.10403,3.035506 3.20535,6.383175 5.05938,9.450276 -0.91853,2.95886 -4.06493,3.650723 -5.34691,0.265618 -2.25715,-2.089033 -4.65672,-6.948595 -7.07024,-2.584686 -4.71758,-3.764394 3.81217,-5.812054 5.12382,-9.226328 0.75738,0.677487 1.38637,1.498638 2.23389,2.095175 z' />
+        <path class='eval' d='m 137.14366,22.299812 c -3.09615,2.259885 0.71537,4.412454 1.99042,6.435866 -3.08975,5.080354 -5.91384,-2.98648 -8.92144,-4.094939 1.44369,-3.219573 3.3497,-1.335928 4.27156,-4.41058 0.97822,-0.894325 1.75044,1.871047 2.65946,2.069653 z' />
+        <path class='eval' d='m 136.85093,14.890174 c 2.31562,5.283511 -7.17975,1.771993 -1.29675,-0.475107 l 0.7108,0.08973 z m 4.867,5.317354 c 2.56912,1.439678 4.26517,4.725219 0.30678,5.233637 -1.56592,-3.098864 -9.51683,-5.749448 -3.64502,-8.633714 1.17746,0.325095 2.15375,2.591149 3.33824,3.400077 z' />
+        <path class='eval' d='m 149.95578,11.976423 c 2.50679,1.334142 4.80455,4.94192 0.75041,5.297394 -0.4641,1.898604 -5.25368,5.602645 -8.0174,1.81545 -3.87347,-2.80918 -0.0676,-7.603844 2.30366,-8.133968 1.67949,-3.8530525 3.16695,-1.1993573 4.96333,1.021124 z m -2.24641,2.175828 c -4.80489,-2.992177 -3.08986,6.380343 0.42374,2.036167 0.33055,-0.677518 0.121,-1.52585 -0.42374,-2.036167 z' />
+        <path class='eval' d='m 153.26135,7.538431 c 2.60497,1.5799548 6.03999,5.944272 1.08117,6.050232 -2.53319,-3.231828 -7.20316,-6.4304525 -8.84748,-9.4582682 1.89121,-2.8664883 3.78452,-2.247699 5.38514,0.8929426 0.78017,0.8503859 1.57195,1.6911437 2.38118,2.5150667 z' />
+    </pattern>
+    <radialGradient id='legendGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+        <stop offset='0%' stop-color='#274c7e' />
+        <stop offset='100%' stop-color='#1f324c' />
+    </radialGradient>
+    <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+        <stop offset='0%' stop-color='#27411f' />
+        <stop offset='100%' stop-color='#22311d' />
+    </radialGradient>
+    <filter id='shadow' width='120%' height='120%'>
+        <feOffset result='offOut' in='SourceGraphic' dx='0' dy='0' />
+        <feColorMatrix result='matrixOut' in='offOut'
+                       values='0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.2 0' />
+        <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='4' />
+        <feBlend in='SourceGraphic' in2='blurOut' />
+    </filter>
+    <filter id='fkShadow' height='130%'>
+        <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+        <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+        <feMerge>
+            <feMergeNode/> <!-- this contains the offset blurred image -->
+            <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+        </feMerge>
+    </filter>
+    <symbol id='calloutArrowDown' >
+        <path d='M 0,0 L 8,12 L 16,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+        <path d='M 0,0 L 8,12 L 16,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+    </symbol>
+    <symbol id='calloutArrowUp' >
+        <path d='M 0,16 L 8,4 L 16,16 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+        <path d='M 0,16 L 8,4 L 16,16' style='stroke:#bebdbd; stroke-width:0.5;' />
+    </symbol>
+    <symbol id='pk' >
+        <g transform='scale(0.99)'>
+            <path style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+                  d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+            <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+                  style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+        </g>
+    </symbol>
+    <symbol id='idx1' >
+        <g transform='scale(0.99)'>
+            <rect width='4' height='4' x='7' y='1' style='fill:#ffff3f;stroke:#e3a23a;stroke-width:0.6;' ry='0.83'/>
+            <rect width='4' height='4' x='1' y='7' style='fill:#ffff3f;stroke:#e3a23a;stroke-width:0.6;' ry='0.832'/>
+            <rect width='4' height='4' x='7' y='7' style='fill:#ffff3f;stroke:#e3a23a;stroke-width:0.6;' ry='0.832'/>
+        </g>
+    </symbol>
+    <symbol id='idx2' >
+        <g transform='scale(0.99)'>
+            <rect width='4' height='3' x='6' y='1' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.83'/>
+            <rect width='7' height='3' x='3' y='6' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.832'/>
+        </g>
+    </symbol>
+    <symbol id='unq' >
+        <g transform='scale(0.99)'>
+            <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+                  width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+            <path style='fill:#323232;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+                  transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+            <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>U</text>
+        </g>
+    </symbol>
+    <symbol id='idx' >
+        <g transform='scale(0.99)'>
+            <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+                  width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+            <path style='fill:#323232;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+                  transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+        </g>
+    </symbol>
+    <symbol id='fk' width="13" height="13">
+        <g transform='scale(0.87)'>
+            <path style='fill:#3791c5;stroke:#3791c5;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+        </g>
+    </symbol>
+    <symbol id='ref' width="13" height="13">
+        <g transform='scale(0.87)'>
+            <path style='fill:#f3e1b7;stroke:#f3e1b7;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+        </g>
+    </symbol>
+    <symbol id='flag0' >
+        <g transform='scale(0.92)'>
+            <path style='fill:#b7d0f6;stroke:#404040;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+        </g>
+    </symbol>
+    <symbol id='flag1' >
+        <g transform='scale(0.92)'>
+            <path style='fill:#f4a393;stroke:#404040;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+        </g>
+    </symbol>
+    <symbol id='flag2' >
+        <g transform='scale(0.92)'>
+            <path style='fill:#77ec8b;stroke:#404040;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+        </g>
+    </symbol>
+    <symbol id='nn' >
+        <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+              d='M 0,0 3,3 M 0,3 3,0 z'/>
+    </symbol>
+    <symbol id='virtual' width="16" height="16">
+        <g transform='scale(0.99)'>
+            <circle cx='8' cy='8' r='5' style='#9e9185;stroke-width:1;fill:transparent' />
+            <path style='stroke:#5394b8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 2.71,5.8 Q-2.12,-2.20 9.15,6.52 Q 17.92,17.67 10.53,13.56'/>
+            <path style='stroke:#5394b8;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M 5.47,13.64 Q -1.82,17.24 6.65,6.78 Q 17.88,-1.36 13.51,5.42'/>
+        </g>
+    </symbol>
+    <symbol id='leaf' width="16" height="16">
+        <g transform='scale(0.99)'>
+            <path style='stroke:#7290ab9d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M .7,0 L.7,9.2 L3.85,9.2'/>
+            <text x="4" y="13" style='fill:#b0880d;stroke-width:0;font-size:14px;'>{ }</text>
+        </g>
+    </symbol>
+    <symbol id='leafArray' width="16" height="16">
+        <g transform='scale(0.99)'>
+            <path style='stroke:#7290ab9d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+                  d='M .7,0 L.7,9.2 L3.85,9.2'/>
+            <text x="4" y="13" style='fill:#b0880d;stroke-width:0;font-size:14px;'>[ ]</text>
+        </g>
+    </symbol>
+    <symbol id='view' >
+        <g transform='scale(0.99)'>
+            <line x1='12' y1='6' x2='19' y2='0' stroke='gray' stroke-width='0.5' />
+            <line x1='0' y1='6' x2='7' y2='0' stroke='gray' stroke-width='0.5' />
+            <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='gray' stroke-width='0.5'/>
+            <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='gray' stroke-width='0.5'/>
+        </g>
+    </symbol>
+    <symbol id='logo' width="100" height="100">
+        <path style='stroke:none;fill:#5d5d5d' d='M2.41,6.80 17.39,0.35 26.83,7.21 28.32,24.45 12.62,29.77 1.74,23.96'/>
+        <path style='stroke:none;fill:#efefef' d='M 2.21, 6.45  9.36, 3.49  9.42,11.63  2.04,14.42'/>
+        <path style='stroke:none;fill:#efefef' d='M10.23, 3.14 17.39, 0.17 17.68, 8.59 10.29,11.28'/>
+        <path style='stroke:none;fill:#d2d2d2' d='M17.44, 0.17 21.59, 3.55 22.36,11.43 17.76,8.63'/>
+        <path style='stroke:none;fill:#d2d2d2' d='M22.67, 4.33 26.98, 7.06 27.65,14.77 23.20,11.77'/>
+        <path style='stroke:none;fill:#efefef' d='M1.89,15.58  9.39,12.65  9.48,21.14  1.57,24.10'/>
+        <path style='stroke:none;fill:#17afde' d='M10.38,12.36 17.70, 9.51 18.11,18.37 10.32 20.96'/>
+        <path style='stroke:none;fill:#1389ad' d='M17.73, 9.59 22.41,12.47 22.82,21.14 18.05,18.34'/>
+        <path style='stroke:none;fill:#d2d2d2' d='M23.26,12.94 27.62,15.70 28.42,24.54 23.69,21.60'/>
+        <path style='stroke:none;fill:#828282' d='M1.57,24.19  9.45,21.22 14.30,24.40  6.80,26.80'/>
+        <path style='stroke:none;fill:#0c485c' d='M10.47,20.90 18.11,18.32 22.82,21.19 15.20,23.81'/>
+        <path style='stroke:none;fill:#828282' d='M23.69,21.63 28.32,24.65 20.87,27.07 15.84,24.30'/>
+        <path style='stroke:none;fill:#828282' d='M14.94,24.68 19.80,27.41 12.59,29.97  7.73,27.21'/>
+    </symbol>
+    <symbol id="bulb" viewBox="0 0 24 24">
+        <rect x="10" y="16" width="4" height="6" rx="1.5" ry="1.5" style='fill:#c4ae85;stroke:#c3ad44;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;' />
+        <circle cx="12" cy="12" r="5" style='fill:#d9c92f;stroke:#c3ad44;stroke-width:0.3;'/>
+    </symbol>
+</defs>
+
+<defs>  <marker id='ZeroMore' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <circle cx='2.13' cy='4.25' r='2.13' style='stroke-width:1;' />
+    <path d='M 8.50,0.00 L 4.25,4.25 L 8.50,8.50' style='stroke-width:1;'/>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='ZeroOne' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+    <circle cx='2.13' cy='4.25' r='2.13' style='stroke-width:1;' />
+    <path d='M 4.25,0.00 L 4.25, 8.50 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='OneMore' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+    <path d='M 4.25,0.00 L 4.25, 8.50 z' style='stroke-width:1;'/>
+    <path d='M 8.50,0.00 L 4.25,4.25 L 8.50,8.50' style='stroke-width:1;'/>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='One' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+    <path d='M 4.25,0.00 L 4.25, 8.50 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='Range' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <path d='M 0.00,4.25 L 8.50,4.25 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='Arrow' viewBox='0 0 8.50 8.50' refX='4.25' refY='4.25' markerWidth='8.50' markerHeight='8.50' orient='auto-start-reverse'>
+    <path d='M 4.250,2.125 L 8.500,4.250 L 4.250,6.375 z' style='stroke-width:1;' class='filled'/>
+  </marker>
+  <linearGradient id='tbg_C1D8EE' x1='0%' y1='0%' x2='100%' y2='0%' >
+     <stop offset='0%' stop-color='#2C343C' /> 
+     <stop offset='100%' stop-color='#282C30' /> 
+  </linearGradient>
+  <linearGradient id='tln_C1D8EE' x1='0%' y1='0%' x2='100%' y2='0%' >
+     <stop offset='0%' stop-color='#2C343C' /> 
+     <stop offset='20%' stop-color='#1B548C' /> 
+     <stop offset='100%' stop-color='#2C343C' /> 
+  </linearGradient>
+</defs>
+
+<!-- == Shape Colors == -->
+<!-- == Desktop == -->
+<rect x='0' y='0' width='1003' height='739' style='fill:url(#layoutBgA); stroke:#444444; stroke-width:.7px; cursor:move;' />
+<rect x='1' y='1' width='1001' height='737' rx='8' ry='8' style='fill:url(#layoutBgEval);' />
+
+<!-- == Legend == -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='360' height='70' rx='7' ry='7' class='legend'/> 
+  <use x='349' y='28' xlink:href='#bulb' width='24' height='24'><title>Read column and table comments by hovering the columns and tables.
+Zoom with CTRL+whell mouse button, pan by dragging the diagram with the right-mouse button</title></use>
+  <use x='20' y='40' xlink:href='#logo'><title>DbSchema Database Designer </title></use>  <text x='20' y='30' class='legendTitle' >Default Diagram</text> 
+  <text x='57' y='47' class='legendSubTitle'><tspan>Read schema comments as mouse-over tooltips</tspan></text>
+  <a xlink:href='https://dbschema.com'><text x='57' y='61' class='legendSubTitle'><tspan>DbSchema.com © 2025-04-03 Wise Coders<title>DbSchema is an universal database designer.
+DbSchema has a free Community Edition.</title></tspan></text></a> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- == Fk 'books_fk_authors' == -->
+<path id='books_fk_authors'  onmouseover="hghl(['books_fk_authors','library.books.author_id','library.authors.author_id'])" onmouseout="uhghl(['books_fk_authors','library.books.author_id','library.authors.author_id'])" transform='translate(8,0)' class='unhighlight' d='M 493,68L 646,68' >
+	<title>&#x1F517;  Foreign Key fk_authors
+books ref authors ( author_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Foreign key to Authors table</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 493,68L 646,68' ><title>&#x1F517;  Foreign Key fk_authors
+books ref authors ( author_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Foreign key to Authors table</title></path>
+<text x='503' y='63' transform='rotate(0 503,63)' class='relName'>author&#95;id</text>
+<!-- == Fk 'books_fk_publishers' == -->
+<path id='books_fk_publishers'  onmouseover="hghl(['books_fk_publishers','library.books.publisher_id','library.publishers.publisher_id'])" onmouseout="uhghl(['books_fk_publishers','library.books.publisher_id','library.publishers.publisher_id'])" transform='translate(8,0)' class='unhighlight' d='M 306,68L 187,68' >
+	<title>&#x1F517;  Foreign Key fk_publishers
+books ref publishers ( publisher_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Foreign key to Publishers table</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 306,68L 187,68' ><title>&#x1F517;  Foreign Key fk_publishers
+books ref publishers ( publisher_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Foreign key to Publishers table</title></path>
+<text x='231' y='63' transform='rotate(0 231,63)' class='relName'>publisher&#95;id</text>
+<!-- == Fk 'loans_fk_member_id_loans' == -->
+<path id='loans_fk_member_id_loans'  onmouseover="hghl(['loans_fk_member_id_loans','library.loans.member_id','library.members.member_id'])" onmouseout="uhghl(['loans_fk_member_id_loans','library.loans.member_id','library.members.member_id'])" transform='translate(8,0)' class='unhighlight' d='M 595,391L 765,391' >
+	<title>&#x1F517;  Foreign Key fk_member_id_loans
+loans ref members ( member_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 595,391L 765,391' ><title>&#x1F517;  Foreign Key fk_member_id_loans
+loans ref members ( member_id )</title></path>
+<text x='605' y='386' transform='rotate(0 605,386)' class='relName'>member&#95;id</text>
+<!-- == Fk 'loans_fk_authorized_by_loans' == -->
+<path id='loans_fk_authorized_by_loans'  onmouseover="hghl(['loans_fk_authorized_by_loans','library.loans.authorized_by','library.admins.admin_id'])" onmouseout="uhghl(['loans_fk_authorized_by_loans','library.loans.authorized_by','library.admins.admin_id'])" transform='translate(8,0)' class='unhighlight' d='M 425,391L 272,391' >
+	<title>&#x1F517;  Foreign Key fk_authorized_by_loans
+loans ref admins ( authorized_by -&gt; admin_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 425,391L 272,391' ><title>&#x1F517;  Foreign Key fk_authorized_by_loans
+loans ref admins ( authorized_by -&gt; admin_id )</title></path>
+<text x='336' y='386' transform='rotate(0 336,386)' class='relName'>authorized&#95;by</text>
+<!-- == Fk 'loans_fk_loans_books' == -->
+<path id='loans_fk_loans_books'  onmouseover="hghl(['loans_fk_loans_books','library.loans.book_id','library.books.book_id'])" onmouseout="uhghl(['loans_fk_loans_books','library.loans.book_id','library.books.book_id'])" transform='translate(8,0)' class='unhighlight' d='M 459,357L 459,306' >
+	<title>&#x1F517;  Foreign Key fk_loans_books
+loans ref books ( book_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 459,357L 459,306' ><title>&#x1F517;  Foreign Key fk_loans_books
+loans ref books ( book_id )</title></path>
+<text x='462' y='355' transform='rotate(270 462,355)' class='relName'>book&#95;id</text>
+<!-- == Table 'admins' == -->
+<rect id='depict_library&#46;admins' class='entity' style='stroke:none;' x='102' y='366' width='170' height='204' rx='4' ry='4' />
+<path d='M 102 395 L 102 370 Q 102 366 106 366 L 268 366 Q 272 366 272 370 L 272 395 L102 395 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='102' y='366' width='170' height='204' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.admins'><text id='depict&#45;library&#46;admins' x='154' y='385' class='tableHeader' style='fill:#B5D2EE;'>admins</text><title>Table library.admins
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Authorized people to confirm or reject loans requests.</title></a>
+  <use x='104' y='404' xlink:href='#nn'/><use x='104' y='403' xlink:href='#pk'><title>&#x1F511;  Pk pk_admins ( admin_id ) </title></use><a xlink:href='#library.admins.admin_id'><text id='library&#46;admins&#46;admin&#95;id' x='122' y='415' onmouseover="hghl(['loans_fk_authorized_by_loans','library.loans.authorized_by'])" onmouseout="uhghl(['loans_fk_authorized_by_loans','library.loans.authorized_by'])" class='colPk'>admin&#95;id</text><title>&#10697;  admin_id
+     * integer
+ &#8601; loans( admin_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique identifier for the administrator.</title></a>
+<a xlink:href='#library.admins.admin_id'><use x='260' y='403' xlink:href='#ref'/><title>&#x1F517;  Referred by loans ( authorized_by -&gt; admin_id ) </title></a>
+  <use x='104' y='420' xlink:href='#unq'><title>&#x1F50D;  Unq unq_username_admins ( username ) </title></use><a xlink:href='#library.admins.username'><text id='library&#46;admins&#46;username' x='122' y='432'>username</text><title>&#10697;  username
+     varchar(100)</title></a>
+<text x='269' y='429' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.pass_hash'><text id='library&#46;admins&#46;pass&#95;hash' x='122' y='449'>pass&#95;hash</text><title>&#10697;  pass_hash
+     varchar(256)</title></a>
+<text x='269' y='446' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.first_name'><text id='library&#46;admins&#46;first&#95;name' x='122' y='466'>first&#95;name</text><title>&#10697;  first_name
+     varchar(100)</title></a>
+<text x='269' y='463' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.last_name'><text id='library&#46;admins&#46;last&#95;name' x='122' y='483'>last&#95;name</text><title>&#10697;  last_name
+     varchar(100)</title></a>
+<text x='269' y='480' text-anchor='end' class='colType'>t</text>  <use x='104' y='488' xlink:href='#unq'><title>&#x1F50D;  Unq unq_email_admins ( email ) </title></use><a xlink:href='#library.admins.email'><text id='library&#46;admins&#46;email' x='122' y='500'>email</text><title>&#10697;  email
+     varchar</title></a>
+<text x='269' y='497' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.phone'><text id='library&#46;admins&#46;phone' x='122' y='517'>phone</text><title>&#10697;  phone
+     varchar(20)</title></a>
+<text x='269' y='514' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.address'><text id='library&#46;admins&#46;address' x='122' y='534'>address</text><title>&#10697;  address
+     varchar</title></a>
+<text x='269' y='531' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.admins.registration_date'><text id='library&#46;admins&#46;registration&#95;date' x='122' y='551'>registration&#95;date</text><title>&#10697;  registration_date
+     date</title></a>
+<text x='269' y='548' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'authors' == -->
+<rect id='depict_library&#46;authors' class='entity' style='stroke:none;' x='663' y='43' width='119' height='136' rx='4' ry='4' />
+<path d='M 663 72 L 663 47 Q 663 43 667 43 L 778 43 Q 782 43 782 47 L 782 72 L663 72 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='663' y='43' width='119' height='136' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.authors'><text id='depict&#45;library&#46;authors' x='687' y='62' class='tableHeader' style='fill:#B5D2EE;'>authors</text><title>Table library.authors
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Tracks author details.</title></a>
+  <use x='665' y='81' xlink:href='#nn'/><use x='665' y='80' xlink:href='#pk'><title>&#x1F511;  Pk pk_auhtors ( author_id ) </title></use><a xlink:href='#library.authors.author_id'><text id='library&#46;authors&#46;author&#95;id' x='683' y='92' onmouseover="hghl(['books_fk_authors','library.books.author_id'])" onmouseout="uhghl(['books_fk_authors','library.books.author_id'])" class='colPk'>author&#95;id</text><title>&#10697;  author_id
+     * integer
+ &#8601; books( author_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique identifier for the author.</title></a>
+<a xlink:href='#library.authors.author_id'><use x='770' y='80' xlink:href='#ref'/><title>&#x1F517;  Referred by books ( author_id ) </title></a>
+  <a xlink:href='#library.authors.first_name'><text id='library&#46;authors&#46;first&#95;name' x='683' y='109'>first&#95;name</text><title>&#10697;  first_name
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Author&#8217;s first name.</title></a>
+<text x='779' y='106' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.authors.last_name'><text id='library&#46;authors&#46;last&#95;name' x='683' y='126'>last&#95;name</text><title>&#10697;  last_name
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Author&#8217;s last name.</title></a>
+<text x='779' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.authors.birth_date'><text id='library&#46;authors&#46;birth&#95;date' x='683' y='143'>birth&#95;date</text><title>&#10697;  birth_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Date of birth (optional).</title></a>
+<text x='779' y='140' text-anchor='end' class='colType'>d</text>  <a xlink:href='#library.authors.nationality'><text id='library&#46;authors&#46;nationality' x='683' y='160'>nationality</text><title>&#10697;  nationality
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Author&#8217;s nationality (optional).</title></a>
+<text x='779' y='157' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'books' == -->
+<rect id='depict_library&#46;books' class='entity' style='stroke:none;' x='323' y='43' width='170' height='255' rx='4' ry='4' />
+<path d='M 323 72 L 323 47 Q 323 43 327 43 L 489 43 Q 493 43 493 47 L 493 72 L323 72 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='323' y='43' width='170' height='255' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.books'><text id='depict&#45;library&#46;books' x='380' y='62' class='tableHeader' style='fill:#B5D2EE;'>books</text><title>Table library.books
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Stores book metadata.</title></a>
+  <use x='325' y='81' xlink:href='#nn'/><use x='325' y='80' xlink:href='#pk'><title>&#x1F511;  Pk pk_books ( book_id ) </title></use><a xlink:href='#library.books.book_id'><text id='library&#46;books&#46;book&#95;id' x='343' y='92' onmouseover="hghl(['loans_fk_loans_books','library.loans.book_id'])" onmouseout="uhghl(['loans_fk_loans_books','library.loans.book_id'])" class='colPk'>book&#95;id</text><title>&#10697;  book_id
+     * integer
+ &#8601; loans( book_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique identifier for the book.</title></a>
+<a xlink:href='#library.books.book_id'><use x='481' y='80' xlink:href='#ref'/><title>&#x1F517;  Referred by loans ( book_id ) </title></a>
+  <use x='325' y='97' xlink:href='#unq'><title>&#x1F50D;  Unq uq_isbn_books ( isbn ) </title></use><a xlink:href='#library.books.isbn'><text id='library&#46;books&#46;isbn' x='343' y='109'>isbn</text><title>&#10697;  isbn
+     bigint
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      ISBN number (unique, nullable if unavailable).</title></a>
+<text x='490' y='106' text-anchor='end' class='colType'>&#35;</text>  <a xlink:href='#library.books.title'><text id='library&#46;books&#46;title' x='343' y='126'>title</text><title>&#10697;  title
+     varchar(255)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Title of the book.</title></a>
+<text x='490' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.books.publication_year'><text id='library&#46;books&#46;publication&#95;year' x='343' y='143'>publication&#95;year</text><title>&#10697;  publication_year
+     integer default 1900
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Year of publication. (higher than 1900)</title></a>
+<text x='490' y='140' text-anchor='end' class='colType'>&#35;</text>  <a xlink:href='#library.books.edition'><text id='library&#46;books&#46;edition' x='343' y='160'>edition</text><title>&#10697;  edition
+     varchar
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Edition number (optional)</title></a>
+<text x='490' y='157' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.books.lang'><text id='library&#46;books&#46;lang' x='343' y='177'>lang</text><title>&#10697;  lang
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Language of the book (e.g., &quot;English&quot;).</title></a>
+<text x='490' y='174' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.books.description'><text id='library&#46;books&#46;description' x='343' y='194'>description</text><title>&#10697;  description
+     text
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Brief summary (optional).</title></a>
+<text x='490' y='191' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.books.genre'><text id='library&#46;books&#46;genre' x='343' y='211'>genre</text><title>&#10697;  genre
+     varchar[]
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Genre name (e.g., &quot;Mystery&quot;).</title></a>
+<text x='490' y='208' text-anchor='end' class='colType'>&#91;&#93;</text>  <a xlink:href='#library.books.publisher_id'><text id='library&#46;books&#46;publisher&#95;id' x='343' y='228' onmouseover="hghl(['books_fk_publishers','library.publishers.publisher_id'])" onmouseout="uhghl(['books_fk_publishers','library.publishers.publisher_id'])">publisher&#95;id</text><title>&#10697;  publisher_id
+     integer
+ &#8599; books( publisher_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Links to Publishers table.</title></a>
+<a xlink:href='#library.books.publisher_id'><use x='481' y='216' xlink:href='#fk'/><title>&#x1F517;  References publishers ( publisher_id ) </title></a>
+  <a xlink:href='#library.books.author_id'><text id='library&#46;books&#46;author&#95;id' x='343' y='245' onmouseover="hghl(['books_fk_authors','library.authors.author_id'])" onmouseout="uhghl(['books_fk_authors','library.authors.author_id'])">author&#95;id</text><title>&#10697;  author_id
+     integer
+ &#8599; books( author_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Links to Authors table.</title></a>
+<a xlink:href='#library.books.author_id'><use x='481' y='233' xlink:href='#fk'/><title>&#x1F517;  References authors ( author_id ) </title></a>
+  <a xlink:href='#library.books.registration_date'><text id='library&#46;books&#46;registration&#95;date' x='343' y='262'>registration&#95;date</text><title>&#10697;  registration_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Date of book registration</title></a>
+<text x='490' y='259' text-anchor='end' class='colType'>d</text>  <a xlink:href='#library.books.available'><text id='library&#46;books&#46;available' x='343' y='279'>available</text><title>&#10697;  available
+     boolean
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Availability to borrow the book.</title></a>
+<text x='490' y='276' text-anchor='end' class='colType'>b</text>
+<!-- == Table 'loans' == -->
+<rect id='depict_library&#46;loans' class='entity' style='stroke:none;' x='442' y='366' width='153' height='170' rx='4' ry='4' />
+<path d='M 442 395 L 442 370 Q 442 366 446 366 L 591 366 Q 595 366 595 370 L 595 395 L442 395 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='442' y='366' width='153' height='170' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.loans'><text id='depict&#45;library&#46;loans' x='493' y='385' class='tableHeader' style='fill:#B5D2EE;'>loans</text><title>Table library.loans</title></a>
+  <use x='444' y='404' xlink:href='#nn'/><use x='444' y='403' xlink:href='#pk'><title>&#x1F511;  Pk pk_loans ( loan_id ) </title></use><a xlink:href='#library.loans.loan_id'><text id='library&#46;loans&#46;loan&#95;id' x='462' y='415' class='colPk'>loan&#95;id</text><title>&#10697;  loan_id
+     * integer</title></a>
+<text x='592' y='412' text-anchor='end' class='colType'>&#35;</text>  <a xlink:href='#library.loans.book_id'><text id='library&#46;loans&#46;book&#95;id' x='462' y='432' onmouseover="hghl(['loans_fk_loans_books','library.books.book_id'])" onmouseout="uhghl(['loans_fk_loans_books','library.books.book_id'])">book&#95;id</text><title>&#10697;  book_id
+     integer
+ &#8599; loans( book_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Book&apos;s ID.</title></a>
+<a xlink:href='#library.loans.book_id'><use x='583' y='420' xlink:href='#fk'/><title>&#x1F517;  References books ( book_id ) </title></a>
+  <a xlink:href='#library.loans.member_id'><text id='library&#46;loans&#46;member&#95;id' x='462' y='449' onmouseover="hghl(['loans_fk_member_id_loans','library.members.member_id'])" onmouseout="uhghl(['loans_fk_member_id_loans','library.members.member_id'])">member&#95;id</text><title>&#10697;  member_id
+     integer
+ &#8599; loans( member_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Borrower&#8217;s ID.</title></a>
+<a xlink:href='#library.loans.member_id'><use x='583' y='437' xlink:href='#fk'/><title>&#x1F517;  References members ( member_id ) </title></a>
+  <a xlink:href='#library.loans.authorized_by'><text id='library&#46;loans&#46;authorized&#95;by' x='462' y='466' onmouseover="hghl(['loans_fk_authorized_by_loans','library.admins.admin_id'])" onmouseout="uhghl(['loans_fk_authorized_by_loans','library.admins.admin_id'])">authorized&#95;by</text><title>&#10697;  authorized_by
+     integer
+ &#8599; loans( admin_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Admin&#8217;s ID.</title></a>
+<a xlink:href='#library.loans.authorized_by'><use x='583' y='454' xlink:href='#fk'/><title>&#x1F517;  References admins ( authorized_by -&gt; admin_id ) </title></a>
+  <a xlink:href='#library.loans.checkout_date'><text id='library&#46;loans&#46;checkout&#95;date' x='462' y='483'>checkout&#95;date</text><title>&#10697;  checkout_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Date the book was borrowed.</title></a>
+<text x='592' y='480' text-anchor='end' class='colType'>d</text>  <a xlink:href='#library.loans.due_date'><text id='library&#46;loans&#46;due&#95;date' x='462' y='500'>due&#95;date</text><title>&#10697;  due_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Expected return date.</title></a>
+<text x='592' y='497' text-anchor='end' class='colType'>d</text>  <a xlink:href='#library.loans.return_date'><text id='library&#46;loans&#46;return&#95;date' x='462' y='517'>return&#95;date</text><title>&#10697;  return_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Actual return date (nullable if not yet returned).</title></a>
+<text x='592' y='514' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'members' == -->
+<rect id='depict_library&#46;members' class='entity' style='stroke:none;' x='782' y='366' width='170' height='170' rx='4' ry='4' />
+<path d='M 782 395 L 782 370 Q 782 366 786 366 L 948 366 Q 952 366 952 370 L 952 395 L782 395 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='782' y='366' width='170' height='170' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.members'><text id='depict&#45;library&#46;members' x='825' y='385' class='tableHeader' style='fill:#B5D2EE;'>members</text><title>Table library.members
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Stores library member details.</title></a>
+  <use x='784' y='404' xlink:href='#nn'/><use x='784' y='403' xlink:href='#pk'><title>&#x1F511;  Pk pk_members ( member_id ) </title></use><a xlink:href='#library.members.member_id'><text id='library&#46;members&#46;member&#95;id' x='802' y='415' onmouseover="hghl(['loans_fk_member_id_loans','library.loans.member_id'])" onmouseout="uhghl(['loans_fk_member_id_loans','library.loans.member_id'])" class='colPk'>member&#95;id</text><title>&#10697;  member_id
+     * integer
+ &#8601; loans( member_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique identifier for the member.</title></a>
+<a xlink:href='#library.members.member_id'><use x='940' y='403' xlink:href='#ref'/><title>&#x1F517;  Referred by loans ( member_id ) </title></a>
+  <a xlink:href='#library.members.first_name'><text id='library&#46;members&#46;first&#95;name' x='802' y='432'>first&#95;name</text><title>&#10697;  first_name
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Member&#8217;s first name.</title></a>
+<text x='949' y='429' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.members.last_name'><text id='library&#46;members&#46;last&#95;name' x='802' y='449'>last&#95;name</text><title>&#10697;  last_name
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Member&#8217;s last name.</title></a>
+<text x='949' y='446' text-anchor='end' class='colType'>t</text>  <use x='784' y='454' xlink:href='#unq'><title>&#x1F50D;  Unq unq_email_members ( email ) </title></use><a xlink:href='#library.members.email'><text id='library&#46;members&#46;email' x='802' y='466'>email</text><title>&#10697;  email
+     varchar
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique email address.</title></a>
+<text x='949' y='463' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.members.phone'><text id='library&#46;members&#46;phone' x='802' y='483'>phone</text><title>&#10697;  phone
+     varchar(20)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Contact number.</title></a>
+<text x='949' y='480' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.members.address'><text id='library&#46;members&#46;address' x='802' y='500'>address</text><title>&#10697;  address
+     varchar
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Member&#8217;s address.</title></a>
+<text x='949' y='497' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.members.registration_date'><text id='library&#46;members&#46;registration&#95;date' x='802' y='517'>registration&#95;date</text><title>&#10697;  registration_date
+     date
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Date of membership registration.</title></a>
+<text x='949' y='514' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'publishers' == -->
+<rect id='depict_library&#46;publishers' class='entity' style='stroke:none;' x='51' y='43' width='136' height='136' rx='4' ry='4' />
+<path d='M 51 72 L 51 47 Q 51 43 55 43 L 183 43 Q 187 43 187 47 L 187 72 L51 72 ' style='fill:url(#tbg_C1D8EE);stroke:none;' />
+<rect class='entity' x='51' y='43' width='136' height='136' rx='4' ry='4' style='fill:none;stroke:#2C3035'/>
+<a xlink:href='#library.publishers'><text id='depict&#45;library&#46;publishers' x='72' y='62' class='tableHeader' style='fill:#B5D2EE;'>publishers</text><title>Table library.publishers</title></a>
+  <use x='53' y='81' xlink:href='#nn'/><use x='53' y='80' xlink:href='#pk'><title>&#x1F511;  Pk pk_publishers ( publisher_id ) </title></use><a xlink:href='#library.publishers.publisher_id'><text id='library&#46;publishers&#46;publisher&#95;id' x='71' y='92' onmouseover="hghl(['books_fk_publishers','library.books.publisher_id'])" onmouseout="uhghl(['books_fk_publishers','library.books.publisher_id'])" class='colPk'>publisher&#95;id</text><title>&#10697;  publisher_id
+     * integer
+ &#8601; books( publisher_id )
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Unique identifier for the publisher.</title></a>
+<a xlink:href='#library.publishers.publisher_id'><use x='175' y='80' xlink:href='#ref'/><title>&#x1F517;  Referred by books ( publisher_id ) </title></a>
+  <a xlink:href='#library.publishers.name'><text id='library&#46;publishers&#46;name' x='71' y='109'>name</text><title>&#10697;  name
+     varchar(100)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Publisher&#8217;s name.</title></a>
+<text x='184' y='106' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.publishers.address'><text id='library&#46;publishers&#46;address' x='71' y='126'>address</text><title>&#10697;  address
+     varchar(255)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Publisher&#8217;s address (optional).</title></a>
+<text x='184' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.publishers.phone'><text id='library&#46;publishers&#46;phone' x='71' y='143'>phone</text><title>&#10697;  phone
+     varchar(20)
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      Contact number (optional).</title></a>
+<text x='184' y='140' text-anchor='end' class='colType'>t</text>  <a xlink:href='#library.publishers.website'><text id='library&#46;publishers&#46;website' x='71' y='160'>website</text><title>&#10697;  website
+     varchar
+ ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+      URL (optional)</title></a>
+<text x='184' y='157' text-anchor='end' class='colType'>t</text>
+</g></svg>

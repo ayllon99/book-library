@@ -14,7 +14,7 @@ def get_db_connection():
         password=os.getenv("DB_PASSWORD")
     )
 
-def create_database(username, password):
+def create_database(username, password, pass_2):
     with open('library-database.sql', 'r') as file:
         sql = file.read()
 
@@ -113,17 +113,43 @@ def create_database(username, password):
     cursor.execute("SELECT * FROM library.loans")
     df = pd.DataFrame(cursor.fetchall())
 
+    cursor.execute("""INSERT INTO library.admins (username, pass_hash, first_name, last_name, email, phone, address, registration_date) VALUES('root', %s, 'jose', 'ayllon', 'jose@example.com', '+159876543', '45 Book St', CURRENT_DATE);""",[pass_2.decode()])
+    cursor.execute("SELECT * FROM library.admins")
+    df = pd.DataFrame(cursor.fetchall())
+    print(df)
+    
+
     conn.commit()
     conn.close()
 
     return
 
+
+def more_books():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    df = pd.read_csv('books.csv')
+    for _, row in df.iterrows():
+        cursor.execute(
+            "INSERT INTO library.books (isbn, title, registration_date) VALUES (%s, %s, CURRENT_TIMESTAMP)",
+            (row['ISBN'], row['Title'])
+        )
+
+    conn.commit()
+    conn.close()
+
 hashed_pw = bcrypt.hashpw("admin123".encode("utf-8"), bcrypt.gensalt())
-create_database('ayllon', hashed_pw)
+hash_2 = bcrypt.hashpw("root".encode("utf-8"), bcrypt.gensalt())
+create_database('ayllon', hashed_pw, hash_2)
+more_books()
 
 if '__name__' == '__main__':
+    print('yeeeess')
     hashed_pw = bcrypt.hashpw("admin123".encode("utf-8"), bcrypt.gensalt())
-    create_database('ayllon', hashed_pw)
+    hash_2 = bcrypt.hashpw("root".encode("utf-8"), bcrypt.gensalt())
+    create_database('ayllon', hashed_pw, hash_2)
+
 
 
 

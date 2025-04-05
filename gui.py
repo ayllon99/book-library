@@ -1,20 +1,8 @@
 import pandas as pd
-import taipy as tp
 from taipy.gui import Gui, Markdown
-import socket
-
-def get_local_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        s.connect(('10.255.255.255', 1))
-        ip = s.getsockname()[0]
-    except Exception:
-        ip = '127.0.0.1'
-    finally:
-        s.close()
-    return ip
-
-
+from networking import LOCAL_IP
+from authentication import LOGIN_PAGE, LOGIN_STYLE
+from authentication import *
 
 # Load CSV data
 df = pd.read_csv('books.csv').fillna('')  # Replace with your CSV path
@@ -48,9 +36,9 @@ def filter_books(state):
     state.filtered_df = temp_df
 
 # Create GUI layout
-page = Markdown("""
+find_book_page = Markdown("""
 <|container|
-# Book Inventory Filter
+# PRIVATE Book Inventory Filter
 
 **Filter Criteria**
   
@@ -61,22 +49,33 @@ Genre: <|{genre_filter}|input|>
 Quantity: <|{quantity_filter}|input|>  
 
 <|Filter|button|on_action=filter_books|>
+<|Logout|button|on_action=on_logout|>
 
 **Filtered Books**  
 <|{filtered_df}|table|page_size=10|show_all|>
 |>
 """)
 
-local_ip = get_local_ip()
-print(f"\n=== Application running at: http://{local_ip}:80 ===")
+PUBLIC_PAGE = Markdown("""
+<|layout|columns=1|
+<|navbar|>
+**Welcome to the PUBLIC Library Admin Dashboard**  
+<|Manage Books|button|on_action=manage_books|>
+|>
+""")
+
+print(f"\n=== Application running at: http://{LOCAL_IP}:80 ===")
 print("Users on the same network can access this URL using the above address")
 
 gui = Gui()
-gui.add_page("main", page)
+gui.add_page("login", LOGIN_PAGE, style=LOGIN_STYLE)
+gui.add_page("public", PUBLIC_PAGE)
+gui.add_page("private", find_book_page)
 gui.run(
     host="0.0.0.0", 
     port=80,
     title="Shared Book Inventory",
-    run_browser=False,  # Prevent automatic browser opening
-    single_client=False
+    run_browser=True,
+    single_client=False,
+    watermark=""
 )
