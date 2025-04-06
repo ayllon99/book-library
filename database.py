@@ -57,11 +57,15 @@ class DatabaseConnect:
     
     def add_new_book(self, new_book: dict) -> None:
         self.cur.execute("""
-            INSERT INTO library.books (isbn, title, publication_year, genre, lang, available)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO library.books (isbn, title, description, edition, author_full_name, publisher_name, publication_year, genre, lang, available)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 new_book["isbn"],
                 new_book["title"],
+                new_book["description"],
+                new_book["edition"],
+                new_book["author"],
+                new_book["publisher"],
                 new_book["publication_year"],
                 new_book["genre"],
                 new_book["language"],
@@ -69,7 +73,55 @@ class DatabaseConnect:
             ))
         self.conn.commit()
 
+    def add_new_author(self, new_author: dict) -> None:
+        self.cur.execute("""
+            INSERT INTO library.authors (first_name, last_name, birth_date, nationality)
+            VALUES (%s, %s, %s, %s)
+            """, (
+                new_author["first_name"],
+                new_author["last_name"],
+                new_author["birth_date"],
+                new_author["nationality"]
+            ))
+        self.conn.commit()
 
+    def add_new_publisher(self, new_publisher: dict) -> None:
+        self.cur.execute("""
+            INSERT INTO library.publishers (name, address, phone, website)
+            VALUES (%s, %s, %s, %s)
+            """, (
+                new_publisher["publisher_name"],
+                new_publisher["publisher_address"],
+                new_publisher["publisher_phone"],
+                new_publisher["publisher_website"]
+            ))
+        self.conn.commit()
 
+    def get_publishers(self) -> list:
+        self.cur.execute("""
+            SELECT DISTINCT(name) FROM library.publishers
+            WHERE name IS NOT NULL;
+            """)
+        publishers = [row[0] for row in self.cur.fetchall()]
+        return publishers
+    
+    def get_authors(self) -> list:
+        self.cur.execute("""
+            SELECT DISTINCT(CONCAT(first_name, ' ', last_name)) FROM library.authors
+            WHERE first_name IS NOT NULL;
+            """)
+        authors = [row[0] for row in self.cur.fetchall()]
+        return authors
 
+    def get_all_books(self) -> pd.DataFrame:
+        self.cur.execute("""
+            SELECT isbn, title, concat(a.first_name, ' ', a.last_name) as author, ARRAY_TO_STRING(b.genre,', ') as genre, b.publication_year
+            FROM library.books b
+            LEFT JOIN library.authors a on b.author_id = a.author_id
+            WHERE b.title IS NOT NULL
+            ORDER BY b.registration_timestamp DESC;
+            """)
+        df = pd.DataFrame(self.cur.fetchall())
+        df.columns = ["ISBN", "TITLE", "AUTHOR", "GENRE", "PUBLICATION YEAR"]
 
+        return df

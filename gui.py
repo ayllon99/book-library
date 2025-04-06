@@ -3,6 +3,7 @@ from taipy.gui import Gui, Markdown
 from networking import LOCAL_IP
 from authentication import LOGIN_PAGE, LOGIN_STYLE
 from authentication import *
+from add_book import *
 
 # Load CSV data
 df = pd.read_csv('books.csv').fillna('')  # Replace with your CSV path
@@ -38,6 +39,7 @@ def filter_books(state):
 # Create GUI layout
 find_book_page = Markdown("""
 <|container|
+<|navbar|>
 # PRIVATE Book Inventory Filter
 
 **Filter Criteria**
@@ -64,18 +66,21 @@ PUBLIC_PAGE = Markdown("""
 |>
 """)
 
-print(f"\n=== Application running at: http://{LOCAL_IP}:80 ===")
-print("Users on the same network can access this URL using the above address")
 
-gui = Gui()
-gui.add_page("login", LOGIN_PAGE, style=LOGIN_STYLE)
-gui.add_page("public", PUBLIC_PAGE)
-gui.add_page("private", find_book_page)
-gui.run(
-    host="0.0.0.0", 
-    port=80,
-    title="Shared Book Inventory",
-    run_browser=True,
-    single_client=False,
-    watermark=""
-)
+
+if __name__ == '__main__':
+    print(f"\n=== Application running at: http://{LOCAL_IP}:80 ===")
+    print("Users on the same network can access this URL using the above address")
+    gui = Gui()
+    gui.add_page("login", LOGIN_PAGE, style=LOGIN_STYLE)
+    gui.add_page("public", PUBLIC_PAGE)
+    gui.add_page("private", find_book_page)
+    gui.add_page("add_book", page=ADD_BOOK_PAGE, style=ADD_BOOK_STYLE)
+    gui.run(
+        host="0.0.0.0", 
+        port=80,
+        title="Shared Book Inventory",
+        run_browser=True,
+        single_client=False,
+        watermark=""
+    )
